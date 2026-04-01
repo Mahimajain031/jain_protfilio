@@ -1,0 +1,530 @@
+x   <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Mahima Jain — Data Analyst</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Mono:wght@400;500&family=Figtree:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:#0b0c10;color:#e8eaf0;font-family:'Figtree',sans-serif;font-weight:300;overflow-x:hidden}
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:#0b0c10}
+::-webkit-scrollbar-thumb{background:rgba(200,240,96,0.35);border-radius:2px}
+
+/* ANIMATIONS */
+@keyframes spinCW{to{transform:rotate(360deg)}}
+@keyframes spinCCW{to{transform:rotate(-360deg)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:translateY(0)}}
+@keyframes barGrow{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+@keyframes pulse{0%,100%{opacity:.5}50%{opacity:1}}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  padding:16px 72px;
+  display:flex;justify-content:space-between;align-items:center;
+  background:rgba(11,12,16,0.92);backdrop-filter:blur(16px);
+  border-bottom:1px solid rgba(200,240,96,0.07);
+}
+.nav-logo{font-family:'Playfair Display',serif;font-size:18px;color:#e8eaf0}
+.nav-logo span{color:#c8f060}
+.nav-links{display:flex;gap:28px}
+.nav-links a{font-family:'DM Mono',monospace;font-size:10.5px;letter-spacing:.15em;text-transform:uppercase;color:#9aa0b0;text-decoration:none;transition:color .2s}
+.nav-links a:hover{color:#c8f060}
+
+/* HERO */
+.hero{
+  min-height:100vh;
+  display:grid;grid-template-columns:1fr 1fr;
+  align-items:center;
+  position:relative;overflow:hidden;
+}
+.glow1{position:absolute;width:550px;height:550px;background:radial-gradient(circle,rgba(200,240,96,0.07) 0%,transparent 70%);top:-80px;right:-60px;pointer-events:none}
+.glow2{position:absolute;width:360px;height:360px;background:radial-gradient(circle,rgba(96,200,240,0.05) 0%,transparent 70%);bottom:60px;left:80px;pointer-events:none}
+
+.hero-left{
+  padding:130px 52px 80px 72px;
+  display:flex;flex-direction:column;justify-content:center;
+  position:relative;z-index:1;
+}
+.eyebrow{
+  font-family:'DM Mono',monospace;font-size:10.5px;letter-spacing:.24em;color:#c8f060;text-transform:uppercase;
+  margin-bottom:20px;
+  animation:fadeUp .7s .1s both;
+}
+.hero-name{
+  font-family:'Playfair Display',serif;font-size:clamp(46px,5.5vw,76px);line-height:1.06;font-weight:700;
+  animation:fadeUp .7s .3s both;
+}
+.hero-name em{color:#c8f060;font-style:italic}
+.hero-sub{
+  font-family:'DM Mono',monospace;font-size:12px;color:#9aa0b0;margin-top:14px;letter-spacing:.06em;
+  animation:fadeUp .7s .5s both;
+}
+.hero-desc{
+  margin-top:22px;font-size:14px;line-height:1.9;color:#9aa0b0;max-width:420px;
+  animation:fadeUp .7s .7s both;
+}
+.hero-cta{display:flex;gap:12px;margin-top:36px;flex-wrap:wrap;animation:fadeUp .7s .9s both}
+.btn{
+  padding:11px 26px;font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.1em;
+  text-transform:uppercase;text-decoration:none;border-radius:2px;transition:all .22s;display:inline-block;
+}
+.btn-primary{background:#c8f060;color:#0b0c10;font-weight:500}
+.btn-primary:hover{background:#d8f870;transform:translateY(-2px)}
+.btn-ghost{border:1px solid rgba(200,240,96,0.22);color:#9aa0b0}
+.btn-ghost:hover{border-color:#c8f060;color:#c8f060;transform:translateY(-2px)}
+
+/* ORB */
+.hero-right{display:flex;align-items:center;justify-content:center;position:relative;z-index:1}
+.orb-wrap{position:relative;width:280px;height:280px;display:flex;align-items:center;justify-content:center}
+.orb-ring{position:absolute;border-radius:50%}
+.orb-ring-1{inset:0;border:1px solid rgba(200,240,96,0.17);animation:spinCW 18s linear infinite}
+.orb-ring-2{inset:18px;border:1px solid rgba(200,240,96,0.1);animation:spinCCW 24s linear infinite}
+.orb-ring-3{inset:36px;border:1px solid rgba(200,240,96,0.06);animation:spinCW 30s linear infinite}
+.orb-dot-wrap-1{position:absolute;width:100%;height:100%;animation:spinCW 18s linear infinite}
+.orb-dot-wrap-2{position:absolute;width:calc(100% - 36px);height:calc(100% - 36px);animation:spinCCW 13s linear infinite}
+.orb-dot{position:absolute;width:8px;height:8px;border-radius:50%;background:#c8f060;box-shadow:0 0 10px #c8f060;top:50%;left:2px;transform:translateY(-50%)}
+.orb-dot-2{position:absolute;width:6px;height:6px;border-radius:50%;background:#60c8f0;box-shadow:0 0 10px #60c8f0;top:2px;left:50%;transform:translateX(-50%)}
+.orb-center{
+  position:absolute;inset:56px;border-radius:50%;
+  background:radial-gradient(circle at 40% 40%,rgba(200,240,96,0.13),rgba(96,200,240,0.06) 60%,transparent);
+  border:1px solid rgba(200,240,96,0.22);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;
+}
+.orb-inf{font-family:'Playfair Display',serif;font-size:36px;color:#c8f060;line-height:1}
+.orb-label{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:.2em;color:#5a6070;text-transform:uppercase}
+
+/* SECTIONS */
+.section{max-width:1040px;margin:0 auto;padding:90px 48px}
+.section-dark{background:#12141a}
+
+.sec-label{display:flex;align-items:center;gap:14px;margin-bottom:34px}
+.sec-label span{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.28em;color:#c8f060;text-transform:uppercase;white-space:nowrap}
+.sec-label-line{flex:1;height:1px;background:rgba(200,240,96,0.1)}
+
+.sec-title{font-family:'Playfair Display',serif;font-size:clamp(26px,3vw,44px);font-weight:700;line-height:1.12}
+.sec-title em{color:#c8f060;font-style:italic}
+
+/* SKILLS */
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:2px;margin-top:42px}
+.skill-card{
+  background:#1a1d26;padding:26px 22px;
+  position:relative;overflow:hidden;
+  transition:background .3s,border-color .3s;cursor:default;
+  border:1px solid transparent;
+}
+.skill-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:0;background:#c8f060;transition:height .4s}
+.skill-card:hover{background:#1e2130;border-color:rgba(200,240,96,0.18)}
+.skill-card:hover::before{height:100%}
+.skill-icon{font-size:22px;margin-bottom:10px}
+.skill-name{font-size:14px;font-weight:500;margin-bottom:6px;color:#e8eaf0}
+.skill-desc{font-size:12.5px;color:#9aa0b0;line-height:1.7}
+
+/* TOOLS */
+.tools-flex{display:flex;flex-wrap:wrap;gap:10px;margin-top:42px}
+.tool-pill{
+  display:flex;align-items:center;gap:8px;padding:9px 16px;
+  background:#1a1d26;border:1px solid rgba(200,240,96,0.12);border-radius:2px;
+  font-family:'DM Mono',monospace;font-size:11.5px;letter-spacing:.04em;color:#9aa0b0;
+  transition:all .22s;cursor:default;
+}
+.tool-pill:hover{border-color:#c8f060;color:#c8f060;transform:translateY(-2px)}
+.tool-dot{width:5px;height:5px;border-radius:50%;flex-shrink:0}
+.dot-green{background:#c8f060}
+.dot-blue{background:#60c8f0}
+
+/* PROJECT */
+.project-card{
+  border:1px solid rgba(200,240,96,0.12);background:#1a1d26;
+  padding:40px;display:grid;grid-template-columns:1.2fr 1fr;gap:40px;
+  align-items:center;margin-top:42px;transition:border-color .3s;
+  position:relative;overflow:hidden;
+}
+.project-card::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(200,240,96,0.03) 0%,transparent 60%);pointer-events:none}
+.project-card:hover{border-color:rgba(200,240,96,0.28)}
+.project-tag{font-family:'DM Mono',monospace;font-size:9.5px;letter-spacing:.2em;color:#c8f060;text-transform:uppercase;margin-bottom:12px}
+.project-title{font-family:'Playfair Display',serif;font-size:24px;font-weight:700;margin-bottom:12px}
+.project-desc{font-size:13.5px;color:#9aa0b0;line-height:1.85}
+.project-tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:20px}
+.tag{padding:4px 11px;background:rgba(200,240,96,0.08);color:#c8f060;font-family:'DM Mono',monospace;font-size:9.5px;border-radius:1px}
+
+/* BAR CHART */
+.bar-chart-wrap{background:#12141a;border:1px solid rgba(200,240,96,0.08);padding:18px 20px;display:flex;align-items:flex-end;gap:5px;height:150px}
+.bar{
+  flex:1;border-radius:2px 2px 0 0;
+  transform:scaleY(0);transform-origin:bottom;
+  transition:transform .7s cubic-bezier(.22,1,.36,1);
+}
+.bar.green{background:linear-gradient(to top,#c8f060,rgba(200,240,96,0.25))}
+.bar.blue{background:linear-gradient(to top,#60c8f0,rgba(96,200,240,0.25))}
+.bar.animated{transform:scaleY(1)}
+
+/* PROFILES */
+.profiles-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:42px}
+.profile-card{
+  display:block;background:#1a1d26;padding:28px 24px;
+  text-decoration:none;color:#e8eaf0;transition:all .3s;
+  position:relative;overflow:hidden;border:1px solid transparent;
+}
+.profile-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:#c8f060;transform:scaleX(0);transition:transform .3s;transform-origin:left}
+.profile-card:hover{background:#1e2130;border-color:rgba(200,240,96,0.18)}
+.profile-card:hover::after{transform:scaleX(1)}
+.profile-icon{font-size:26px;margin-bottom:14px}
+.profile-platform{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.25em;color:#5a6070;text-transform:uppercase;margin-bottom:8px}
+.profile-handle{font-family:'Playfair Display',serif;font-size:17px;margin-bottom:6px}
+.profile-url{font-family:'DM Mono',monospace;font-size:10.5px;color:#c8f060}
+
+/* CONTACT FORM */
+.contact-grid{display:grid;grid-template-columns:1fr 1.4fr;gap:60px;margin-top:52px;align-items:start}
+.contact-info-block{display:flex;flex-direction:column;gap:28px}
+.contact-info-item{display:flex;align-items:flex-start;gap:16px;padding:20px;background:#1a1d26;border:1px solid rgba(200,240,96,0.08);transition:border-color .25s}
+.contact-info-item:hover{border-color:rgba(200,240,96,0.22)}
+.ci-icon{font-size:20px;margin-top:2px;flex-shrink:0}
+.ci-label{font-family:'DM Mono',monospace;font-size:9.5px;letter-spacing:.22em;color:#5a6070;text-transform:uppercase;margin-bottom:5px}
+.ci-value{font-size:13.5px;color:#e8eaf0}
+.ci-value a{color:#c8f060;text-decoration:none}
+.ci-value a:hover{text-decoration:underline}
+
+.contact-form-box{background:#1a1d26;border:1px solid rgba(200,240,96,0.1);padding:36px 32px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.form-group{display:flex;flex-direction:column;gap:7px;margin-bottom:16px}
+.form-group label{font-family:'DM Mono',monospace;font-size:9.5px;letter-spacing:.2em;color:#c8f060;text-transform:uppercase}
+.form-group input,
+.form-group textarea,
+.form-group select{
+  background:#0f111a;border:1px solid rgba(200,240,96,0.14);border-radius:2px;
+  color:#e8eaf0;font-family:'Figtree',sans-serif;font-size:13.5px;font-weight:300;
+  padding:11px 14px;outline:none;transition:border-color .22s,box-shadow .22s;
+  width:100%;
+}
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus{border-color:#c8f060;box-shadow:0 0 0 3px rgba(200,240,96,0.07)}
+.form-group input::placeholder,
+.form-group textarea::placeholder{color:#5a6070}
+.form-group select option{background:#0f111a;color:#e8eaf0}
+.form-group textarea{resize:vertical;min-height:120px}
+.form-submit{
+  width:100%;padding:13px;background:#c8f060;color:#0b0c10;
+  border:none;border-radius:2px;cursor:pointer;
+  font-family:'DM Mono',monospace;font-size:11.5px;letter-spacing:.12em;font-weight:500;
+  text-transform:uppercase;transition:all .22s;margin-top:4px;
+}
+.form-submit:hover{background:#d8f870;transform:translateY(-2px)}
+.form-submit:active{transform:translateY(0)}
+
+/* SUCCESS MSG */
+.form-success{
+  display:none;align-items:center;gap:14px;
+  background:rgba(200,240,96,0.07);border:1px solid rgba(200,240,96,0.25);
+  padding:18px 20px;margin-top:16px;border-radius:2px;
+}
+.form-success.show{display:flex}
+.form-success-icon{font-size:20px}
+.form-success-text{font-size:13px;color:#c8f060;font-family:'DM Mono',monospace;letter-spacing:.05em}
+
+/* FOOTER */
+footer{
+  border-top:1px solid rgba(200,240,96,0.07);
+  padding:28px 72px;display:flex;justify-content:space-between;align-items:center;
+}
+.footer-name{font-family:'Playfair Display',serif;font-size:16px}
+.footer-name em{color:#c8f060;font-style:italic}
+.footer-note{font-family:'DM Mono',monospace;font-size:10.5px;color:#5a6070;letter-spacing:.1em}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  nav{padding:14px 28px}
+  .nav-links{gap:18px}
+  .hero{grid-template-columns:1fr}
+  .hero-right{display:none}
+  .hero-left{padding:110px 28px 60px}
+  .section{padding:60px 28px}
+  .project-card{grid-template-columns:1fr}
+  .profiles-grid{grid-template-columns:1fr}
+  .contact-grid{grid-template-columns:1fr}
+  .form-row{grid-template-columns:1fr}
+  footer{flex-direction:column;gap:10px;padding:24px 28px;text-align:center}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Mahima<span>.</span></div>
+  <div class="nav-links">
+    <a href="#skills">Skills</a>
+    <a href="#tools">Tools</a>
+    <a href="#projects">Projects</a>
+    <a href="#connect">Connect</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="glow1"></div>
+  <div class="glow2"></div>
+
+  <div class="hero-left">
+    <div class="eyebrow">✦ Data Analyst &amp; CSE Student</div>
+    <h1 class="hero-name">Mahima<br/><em>Jain</em></h1>
+    <p class="hero-sub">B.Tech CSE · Hyderabad, India</p>
+    <p class="hero-desc">Turning raw data into meaningful insights. I build dashboards, write clean SQL, and make sense of numbers — passionate about data analytics and AI-driven decision-making.</p>
+    <div class="hero-cta">
+      <a href="#connect" class="btn btn-primary">Get in Touch</a>
+      <a href="#projects" class="btn btn-ghost">See Projects</a>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="orb-wrap">
+      <div class="orb-ring orb-ring-1"></div>
+      <div class="orb-ring orb-ring-2"></div>
+      <div class="orb-ring orb-ring-3"></div>
+      <div class="orb-dot-wrap-1"><div class="orb-dot"></div></div>
+      <div class="orb-dot-wrap-2"><div class="orb-dot-2"></div></div>
+      <div class="orb-center">
+        <div class="orb-inf">∞</div>
+        <div class="orb-label">Insights</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills" class="section">
+  <div class="sec-label"><span>01 — Core Skills</span><div class="sec-label-line"></div></div>
+  <h2 class="sec-title">What I bring<br/><em>to the table</em></h2>
+  <div class="skills-grid">
+    <div class="skill-card"><div class="skill-icon">🧹</div><div class="skill-name">Data Cleaning & Analysis</div><div class="skill-desc">Transforming messy, raw datasets into clean, structured data ready for insight extraction.</div></div>
+    <div class="skill-card"><div class="skill-icon">📊</div><div class="skill-name">Data Visualization</div><div class="skill-desc">Creating interactive dashboards and charts that communicate complex data intuitively.</div></div>
+    <div class="skill-card"><div class="skill-icon">🗄️</div><div class="skill-name">SQL Queries</div><div class="skill-desc">Proficient in joins, aggregation, and filtering to extract exactly the right data, fast.</div></div>
+    <div class="skill-card"><div class="skill-icon">📐</div><div class="skill-name">Basic Statistics</div><div class="skill-desc">Applying statistical methods for accurate interpretation and validation of data patterns.</div></div>
+    <div class="skill-card"><div class="skill-icon">🔍</div><div class="skill-name">Problem Solving</div><div class="skill-desc">Breaking down complex analytical challenges into structured, logical steps.</div></div>
+    <div class="skill-card"><div class="skill-icon">🚀</div><div class="skill-name">Continuous Learning</div><div class="skill-desc">Quick learner focused on growth in data analytics and AI-driven decision-making.</div></div>
+  </div>
+</section>
+
+<!-- TOOLS -->
+<div id="tools" class="section-dark">
+  <div class="section">
+    <div class="sec-label"><span>02 — Tools & Technologies</span><div class="sec-label-line"></div></div>
+    <h2 class="sec-title">My <em>toolkit</em></h2>
+    <div class="tools-flex">
+      <div class="tool-pill"><span class="tool-dot dot-green"></span>Excel</div>
+      <div class="tool-pill"><span class="tool-dot dot-green"></span>VLOOKUP / XLOOKUP</div>
+      <div class="tool-pill"><span class="tool-dot dot-green"></span>Pivot Tables</div>
+      <div class="tool-pill"><span class="tool-dot dot-green"></span>SQL</div>
+      <div class="tool-pill"><span class="tool-dot dot-green"></span>Power BI</div>
+      <div class="tool-pill"><span class="tool-dot dot-green"></span>Python</div>
+      <div class="tool-pill"><span class="tool-dot dot-green"></span>Pandas</div>
+      <div class="tool-pill"><span class="tool-dot dot-green"></span>NumPy</div>
+      <div class="tool-pill"><span class="tool-dot dot-green"></span>Matplotlib</div>
+      <div class="tool-pill"><span class="tool-dot dot-blue"></span>Tableau</div>
+      <div class="tool-pill"><span class="tool-dot dot-blue"></span>Microsoft Fabric</div>
+    </div>
+  </div>
+</div>
+
+<!-- PROJECTS -->
+<section id="projects" class="section">
+  <div class="sec-label"><span>03 — Projects</span><div class="sec-label-line"></div></div>
+  <h2 class="sec-title">Work that <em>speaks numbers</em></h2>
+  <div class="project-card">
+    <div>
+      <div class="project-tag">Featured Project</div>
+      <div class="project-title">IPL Analysis Dashboard</div>
+      <div class="project-desc">A comprehensive dashboard analyzing IPL cricket data to uncover team performance trends, player statistics, match outcomes, and season-wise insights. Built to demonstrate end-to-end data analytics workflow — from data cleaning to interactive visualization.</div>
+      <div class="project-tags">
+        <span class="tag">Power BI</span>
+        <span class="tag">Python</span>
+        <span class="tag">Pandas</span>
+        <span class="tag">SQL</span>
+        <span class="tag">Data Viz</span>
+      </div>
+    </div>
+    <div class="bar-chart-wrap" id="barChart">
+      <div class="bar green" style="--h:55%"></div>
+      <div class="bar green" style="--h:80%"></div>
+      <div class="bar green" style="--h:45%"></div>
+      <div class="bar blue"  style="--h:95%"></div>
+      <div class="bar green" style="--h:65%"></div>
+      <div class="bar green" style="--h:75%"></div>
+      <div class="bar green" style="--h:50%"></div>
+      <div class="bar green" style="--h:88%"></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONNECT -->
+<div id="connect" class="section-dark">
+  <div class="section">
+    <div class="sec-label"><span>04 — Profiles</span><div class="sec-label-line"></div></div>
+    <h2 class="sec-title">Find me <em>online</em></h2>
+    <div class="profiles-grid">
+      <a class="profile-card" href="https://www.linkedin.com/in/mahima-jain-654080294" target="_blank">
+        <div class="profile-icon">💼</div>
+        <div class="profile-platform">LinkedIn</div>
+        <div class="profile-handle">Mahima Jain</div>
+        <div class="profile-url">linkedin.com/in/mahima-jain-654080294 ↗</div>
+      </a>
+      <a class="profile-card" href="https://github.com/mahimajain031" target="_blank">
+        <div class="profile-icon">🐙</div>
+        <div class="profile-platform">GitHub</div>
+        <div class="profile-handle">mahimajain031</div>
+        <div class="profile-url">github.com/mahimajain031 ↗</div>
+      </a>
+      <a class="profile-card" href="https://www.kaggle.com/mahimajain031" target="_blank">
+        <div class="profile-icon">📈</div>
+        <div class="profile-platform">Kaggle</div>
+        <div class="profile-handle">mahimajain031</div>
+        <div class="profile-url">kaggle.com/mahimajain031 ↗</div>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- CONTACT FORM -->
+<section id="contact" class="section">
+  <div class="sec-label"><span>05 — Contact Me</span><div class="sec-label-line"></div></div>
+  <h2 class="sec-title">Let's <em>get in touch</em></h2>
+
+  <div class="contact-grid">
+
+    <!-- Info Side -->
+    <div class="contact-info-block">
+      <div class="contact-info-item">
+        <div class="ci-icon">📧</div>
+        <div>
+          <div class="ci-label">Email</div>
+          <div class="ci-value"><a href="mailto:mahimajain031@gmail.com">mahimajain031@gmail.com</a></div>
+        </div>
+      </div>
+      <div class="contact-info-item">
+        <div class="ci-icon">📍</div>
+        <div>
+          <div class="ci-label">Location</div>
+          <div class="ci-value">Hyderabad, Telangana, India</div>
+        </div>
+      </div>
+      <div class="contact-info-item">
+        <div class="ci-icon">🎓</div>
+        <div>
+          <div class="ci-label">Education</div>
+          <div class="ci-value">B.Tech — Computer Science & Engineering</div>
+        </div>
+      </div>
+      <div class="contact-info-item">
+        <div class="ci-icon">💼</div>
+        <div>
+          <div class="ci-label">Open To</div>
+          <div class="ci-value">Internships · Freelance · Full-time roles</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Form Side -->
+    <div class="contact-form-box">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="fname">Your Name</label>
+          <input type="text" id="fname" placeholder="e.g. Rahul Sharma" />
+        </div>
+        <div class="form-group">
+          <label for="femail">Email Address</label>
+          <input type="email" id="femail" placeholder="rahul@example.com" />
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="fsubject">Subject</label>
+        <select id="fsubject">
+          <option value="" disabled selected>Select a subject...</option>
+          <option>Internship Opportunity</option>
+          <option>Freelance Project</option>
+          <option>Job Offer</option>
+          <option>Collaboration</option>
+          <option>General Inquiry</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="fmessage">Message</label>
+        <textarea id="fmessage" placeholder="Hi Mahima, I'd love to connect about..."></textarea>
+      </div>
+      <button class="form-submit" onclick="submitForm()">Send Message →</button>
+      <div class="form-success" id="successMsg">
+        <div class="form-success-icon">✅</div>
+        <div class="form-success-text">Message sent! Mahima will get back to you soon.</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-name">Mahima <em>Jain</em></div>
+  <div class="footer-note">Data Analyst · B.Tech CSE · Hyderabad</div>
+</footer>
+
+<script>
+  // Bar chart heights using CSS custom props
+  document.querySelectorAll('.bar').forEach(b => {
+    b.style.height = b.style.getPropertyValue('--h') || b.style.cssText.match(/--h:([^;]+)/)?.[1] || '50%';
+  });
+
+  // Animate bars on scroll into view
+  const barChart = document.getElementById('barChart');
+  const bars = barChart.querySelectorAll('.bar');
+
+  // Set initial heights from CSS vars
+  const heights = [55,80,45,95,65,75,50,88];
+  bars.forEach((b,i) => { b.style.height = heights[i]+'%'; });
+
+  // Contact form submit
+  function submitForm() {
+    const name    = document.getElementById('fname').value.trim();
+    const email   = document.getElementById('femail').value.trim();
+    const subject = document.getElementById('fsubject').value;
+    const message = document.getElementById('fmessage').value.trim();
+
+    if (!name || !email || !subject || !message) {
+      alert('Please fill in all fields before sending.');
+      return;
+    }
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      alert('Please enter a valid email address.');
+      return;
+    }
+
+    // Show success message
+    document.getElementById('successMsg').classList.add('show');
+    document.getElementById('fname').value    = '';
+    document.getElementById('femail').value   = '';
+    document.getElementById('fsubject').value = '';
+    document.getElementById('fmessage').value = '';
+
+    setTimeout(() => {
+      document.getElementById('successMsg').classList.remove('show');
+    }, 5000);
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        bars.forEach((bar, i) => {
+          setTimeout(() => bar.classList.add('animated'), i * 70);
+        });
+        observer.disconnect();
+      }
+    });
+  }, {threshold: 0.3});
+  observer.observe(barChart);
+</script>
+</body>
+</html>
