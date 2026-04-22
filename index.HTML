@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Mahima Jain — Data Analyst</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Mono:wght@400;500&family=Figtree:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+
+<style>
+/* KEEP YOUR ORIGINAL CSS (no change needed) */
+</style>
+
+</head>
+
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Mahima<span>.</span></div>
+  <div class="nav-links">
+    <a href="#skills">Skills</a>
+    <a href="#tools">Tools</a>
+    <a href="#education">Education</a>
+    <a href="#projects">Projects</a>
+    <a href="#contact">Contact</a>
+
+    <div class="theme-toggle" onclick="toggleTheme()">
+      <div class="toggle-track"><div class="toggle-thumb"></div></div>
+      <span id="themeLabel">DARK</span>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-center">
+
+    <!-- IMAGE FIXED -->
+    <div class="hero-photo-wrap">
+      <img src="profile.jpg" alt="Mahima Jain" class="hero-img">
+    </div>
+
+    <!-- TEXT UPDATED -->
+    <div class="hero-info">
+
+      <div class="eyebrow">Portfolio</div>
+
+      <h1 class="hero-name">
+        Turning <em>Data</em> into Decisions
+      </h1>
+
+      <p class="hero-sub">
+        ASPIRING DATA ANALYST • SQL • POWER BI • EXCEL
+      </p>
+
+      <p class="hero-desc">
+        I transform raw data into meaningful insights that help businesses make better decisions. 
+        Skilled in data cleaning, dashboard creation, and uncovering trends using SQL, Excel, and Power BI.
+      </p>
+
+      <div class="hero-cta">
+        <a href="resume.pdf" class="btn btn-primary" download>Download Resume</a>
+        <a href="#projects" class="btn btn-ghost">View Projects</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- IMPACT SECTION (NEW) -->
+<section class="section">
+
+  <div class="sec-label">
+    <span>Impact</span>
+    <div class="sec-label-line"></div>
+  </div>
+
+  <h2 class="sec-title">What I’ve <em>Delivered</em></h2>
+
+  <div class="skills-grid">
+
+    <div class="skill-card">
+      <div class="skill-name">📊 Dashboard Creation</div>
+      <div class="skill-desc">
+        Built dashboards to track KPIs and improve decision-making.
+      </div>
+    </div>
+
+    <div class="skill-card">
+      <div class="skill-name">📈 Data Analysis</div>
+      <div class="skill-desc">
+        Identified trends and insights from raw datasets.
+      </div>
+    </div>
+
+    <div class="skill-card">
+      <div class="skill-name">🧹 Data Cleaning</div>
+      <div class="skill-desc">
+        Cleaned messy data and improved accuracy for analysis.
+      </div>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- PROJECT SECTION -->
+<section class="section" id="projects">
+
+  <div class="sec-label">
+    <span>Projects</span>
+    <div class="sec-label-line"></div>
+  </div>
+
+  <h2 class="sec-title">Featured <em>Work</em></h2>
+
+  <div class="project-card">
+
+    <div>
+      <div class="project-tag">Featured Project</div>
+
+      <div class="project-title">Sales Performance Dashboard</div>
+
+      <div class="project-desc">
+        Analyzed sales data to identify top-performing products and trends. 
+        Built a Power BI dashboard and discovered a 20% growth opportunity.
+      </div>
+
+      <div class="project-tags">
+        <span class="tag">Power BI</span>
+        <span class="tag">Excel</span>
+        <span class="tag">Data Visualization</span>
+      </div>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-name">Mahima <em>Jain</em></div>
+  <div class="footer-note">© 2026 Portfolio</div>
+</footer>
+
+<!-- JS FIXED -->
+<script>
+function toggleTheme() {
+  const html = document.documentElement;
+  const label = document.getElementById("themeLabel");
+
+  if (html.getAttribute("data-theme") === "dark") {
+    html.setAttribute("data-theme", "light");
+    label.textContent = "LIGHT";
+  } else {
+    html.setAttribute("data-theme", "dark");
+    label.textContent = "DARK";
+  }
+}
+
+// Smooth animation
+window.addEventListener("load", () => {
+  document.querySelectorAll(".bar").forEach(bar => {
+    bar.classList.add("animated");
+  });
+});
+</script>
+
+</body>
+</html>
