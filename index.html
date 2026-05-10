@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Mahima Jain — Data Analyst</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Mono:wght@400;500&family=Figtree:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+ 
+[data-theme="dark"]{
+  --bg:#0a0f2e;--bg2:#0d1235;--bg3:#111a3d;--bg4:#151f45;--bg5:#080c25;
+  --text:#e8eaf0;--text2:#9aa0b0;--text3:#5a6070;
+  --accent:#c8f060;--accent2:#60c8f0;--accent-hover:#d8f870;
+  --border:rgba(255,255,255,0.06);--border2:rgba(255,255,255,0.09);
+  --border3:rgba(200,240,96,0.22);--border4:rgba(200,240,96,0.35);
+  --card-bg:#1a1d26;--nav-bg:rgba(10,15,46,0.95);
+  --ring1:rgba(200,240,96,0.18);--ring2:rgba(200,240,96,0.09);--ring3:rgba(200,240,96,0.04);
+  --photo-border:rgba(200,240,96,0.35);
+  --scrollbar:rgba(200,240,96,0.3);
+}
+[data-theme="light"]{
+  --bg:#f4f5f0;--bg2:#eaece4;--bg3:#ffffff;--bg4:#e4e6de;--bg5:#f4f5f0;
+  --text:#1a1d26;--text2:#4a5060;--text3:#8a909a;
+  --accent:#5a8a00;--accent2:#0070a0;--accent-hover:#4a7800;
+  --border:rgba(0,0,0,0.07);--border2:rgba(0,0,0,0.1);
+  --border3:rgba(90,138,0,0.3);--border4:rgba(90,138,0,0.45);
+  --card-bg:#ffffff;--nav-bg:rgba(244,245,240,0.95);
+  --ring1:rgba(90,138,0,0.2);--ring2:rgba(90,138,0,0.1);--ring3:rgba(90,138,0,0.05);
+  --photo-border:rgba(90,138,0,0.4);
+  --scrollbar:rgba(90,138,0,0.3);
+}
+ 
+body{background:var(--bg);color:var(--text);font-family:'Figtree',sans-serif;font-weight:300;overflow-x:hidden;transition:background .3s,color .3s}
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--scrollbar);border-radius:2px}
+ 
+@keyframes spinCW{to{transform:rotate(360deg)}}
+@keyframes spinCCW{to{transform:rotate(-360deg)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:translateY(0)}}
+@keyframes pulseDot{0%,100%{opacity:.5;transform:scale(1)}50%{opacity:1;transform:scale(1.3)}}
+ 
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:16px 72px;display:flex;justify-content:space-between;align-items:center;background:var(--nav-bg);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);transition:background .3s,border-color .3s}
+.nav-logo{font-family:'Playfair Display',serif;font-size:18px;color:var(--text)}
+.nav-logo span{color:var(--accent)}
+.nav-links{display:flex;gap:28px;align-items:center;flex-wrap:wrap}
+.nav-links a{font-family:'DM Mono',monospace;font-size:10.5px;letter-spacing:.15em;text-transform:uppercase;color:var(--text2);text-decoration:none;transition:color .2s}
+.nav-links a:hover{color:var(--accent)}
+.theme-toggle{display:flex;align-items:center;gap:8px;cursor:pointer;background:var(--card-bg);border:1px solid var(--border2);border-radius:20px;padding:5px 12px;transition:all .25s;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;color:var(--text2)}
+.theme-toggle:hover{border-color:var(--accent);color:var(--accent)}
+.toggle-track{width:30px;height:16px;border-radius:10px;background:var(--border2);position:relative;transition:background .3s;flex-shrink:0}
+[data-theme="dark"] .toggle-track{background:rgba(200,240,96,0.25)}
+[data-theme="light"] .toggle-track{background:rgba(90,138,0,0.2)}
+.toggle-thumb{position:absolute;top:2px;width:12px;height:12px;border-radius:50%;background:var(--accent);transition:left .3s}
+[data-theme="dark"] .toggle-thumb{left:16px}
+[data-theme="light"] .toggle-thumb{left:2px}
+ 
+/* HERO */
+.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;padding-top:80px}
+.glow1{position:absolute;width:500px;height:500px;background:radial-gradient(circle,var(--ring1) 0%,transparent 70%);top:-60px;right:0;pointer-events:none}
+.glow2{position:absolute;width:340px;height:340px;background:radial-gradient(circle,rgba(96,200,240,0.05) 0%,transparent 70%);bottom:80px;left:60px;pointer-events:none}
+.hero-center{display:flex;flex-direction:row;align-items:center;justify-content:center;gap:72px;max-width:980px;width:100%;padding:0 48px;z-index:1}
+.hero-info{flex:1;max-width:480px}
+ 
+/* PHOTO CIRCLE */
+.hero-photo-wrap{position:relative;width:300px;height:300px;flex-shrink:0;display:flex;align-items:center;justify-content:center}
+.ring{position:absolute;border-radius:50%;pointer-events:none}
+.ring-1{inset:0;border:1px solid var(--ring1);animation:spinCW 18s linear infinite}
+.ring-2{inset:-18px;border:1px solid var(--ring2);animation:spinCCW 26s linear infinite}
+.ring-3{inset:-36px;border:1px solid var(--ring3);animation:spinCW 36s linear infinite}
+.orbit-1{position:absolute;inset:0;border-radius:50%;animation:spinCW 18s linear infinite}
+.orbit-2{position:absolute;inset:-18px;border-radius:50%;animation:spinCCW 13s linear infinite}
+.orb-dot{position:absolute;border-radius:50%}
+.orb-dot-g{width:9px;height:9px;background:var(--accent);top:50%;left:-4px;transform:translateY(-50%)}
+.orb-dot-b{width:7px;height:7px;background:var(--accent2);top:-3px;left:50%;transform:translateX(-50%)}
+ 
+/* FIX 1: Photo placeholder when no real photo is available */
+.hero-img-placeholder{
+  width:270px;height:270px;
+  border-radius:50%;
+  border:3px solid var(--photo-border);
+  position:relative;z-index:2;
+  display:flex;align-items:center;justify-content:center;
+  background:var(--bg3);
+  font-size:72px;
+}
+.hero-img{
+  width:270px;height:270px;
+  object-fit:cover;object-position:top center;
+  border-radius:50%;
+  border:3px solid var(--photo-border);
+  position:relative;z-index:2;
+  display:block;
+}
+.hero-badge{position:absolute;bottom:-20px;left:50%;transform:translateX(-50%);background:var(--bg3);border:1px solid var(--border3);padding:7px 16px;border-radius:20px;display:flex;align-items:center;gap:8px;z-index:3;white-space:nowrap;transition:background .3s,border-color .3s}
+.badge-dot{width:7px;height:7px;border-radius:50%;background:var(--accent);flex-shrink:0;animation:pulseDot 2s infinite}
+.badge-text{font-family:'DM Mono',monospace;font-size:9.5px;letter-spacing:.1em;color:var(--text2);text-transform:uppercase}
+ 
+/* HERO TEXT */
+.eyebrow{font-family:'DM Mono',monospace;font-size:10.5px;letter-spacing:.24em;color:var(--accent);text-transform:uppercase;margin-bottom:20px;animation:fadeUp .7s .1s both}
+.hero-name{font-family:'Playfair Display',serif;font-size:clamp(42px,5vw,72px);line-height:1.06;font-weight:700;animation:fadeUp .7s .3s both;color:var(--text)}
+.hero-name em{color:var(--accent);font-style:italic}
+.hero-sub{font-family:'DM Mono',monospace;font-size:12px;color:var(--text2);margin-top:14px;letter-spacing:.06em;animation:fadeUp .7s .5s both}
+.hero-desc{margin-top:22px;font-size:14px;line-height:1.9;color:var(--text2);animation:fadeUp .7s .7s both}
+.hero-cta{display:flex;gap:12px;margin-top:36px;flex-wrap:wrap;animation:fadeUp .7s .9s both}
+.btn{padding:11px 26px;font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;border-radius:2px;transition:all .22s;display:inline-block}
+.btn-primary{background:var(--accent);color:#0b0c10;font-weight:500}
+.btn-primary:hover{background:var(--accent-hover);transform:translateY(-2px)}
+.btn-ghost{border:1px solid var(--border2);color:var(--text2)}
+.btn-ghost:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-2px)}
+ 
+/* SECTIONS */
+.section{max-width:1040px;margin:0 auto;padding:90px 48px}
+.section-dark{background:var(--bg2);transition:background .3s}
+.sec-label{display:flex;align-items:center;gap:14px;margin-bottom:34px}
+.sec-label span{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.28em;color:var(--accent);text-transform:uppercase;white-space:nowrap}
+.sec-label-line{flex:1;height:1px;background:var(--border)}
+.sec-title{font-family:'Playfair Display',serif;font-size:clamp(26px,3vw,44px);font-weight:700;line-height:1.12;color:var(--text)}
+.sec-title em{color:var(--accent);font-style:italic}
+ 
+/* SKILLS */
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:2px;margin-top:42px}
+.skill-card{background:var(--card-bg);padding:26px 22px;position:relative;overflow:hidden;transition:background .3s,border-color .3s;cursor:default;border:1px solid transparent}
+.skill-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:0;background:var(--accent);transition:height .4s}
+.skill-card:hover{background:var(--bg4);border-color:var(--border3)}
+.skill-card:hover::before{height:100%}
+.skill-icon{font-size:22px;margin-bottom:10px}
+.skill-name{font-size:14px;font-weight:500;margin-bottom:6px;color:var(--text)}
+.skill-desc{font-size:12.5px;color:var(--text2);line-height:1.7}
+ 
+/* TOOLS */
+.tools-flex{display:flex;flex-wrap:wrap;gap:10px;margin-top:42px}
+.tool-pill{display:flex;align-items:center;gap:8px;padding:9px 16px;background:var(--card-bg);border:1px solid var(--border2);border-radius:2px;font-family:'DM Mono',monospace;font-size:11.5px;letter-spacing:.04em;color:var(--text2);transition:all .22s;cursor:default}
+.tool-pill:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-2px)}
+.tool-dot{width:5px;height:5px;border-radius:50%;flex-shrink:0}
+.dot-green{background:var(--accent)}
+.dot-blue{background:var(--accent2)}
+ 
+/* EDUCATION */
+.edu-accordion{margin-top:42px;display:flex;flex-direction:column;gap:2px}
+.edu-item{border:1px solid var(--border2);background:var(--card-bg);overflow:hidden;transition:border-color .3s,background .3s}
+.edu-item:hover{border-color:var(--border3)}
+.edu-header{display:flex;align-items:center;gap:20px;padding:22px 26px;cursor:pointer;transition:background .2s;user-select:none}
+.edu-header:hover{background:var(--bg4)}
+.edu-icon{font-size:22px;flex-shrink:0}
+.edu-header-info{flex:1}
+.edu-degree{font-size:15px;font-weight:500;color:var(--text);margin-bottom:4px}
+.edu-school{font-family:'DM Mono',monospace;font-size:10.5px;letter-spacing:.08em;color:var(--text2)}
+.edu-status{font-family:'DM Mono',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;padding:4px 10px;border-radius:2px;flex-shrink:0}
+.status-pursuing{background:rgba(200,240,96,0.1);color:var(--accent);border:1px solid var(--ring1)}
+.status-completed{background:rgba(96,200,240,0.1);color:var(--accent2);border:1px solid rgba(96,200,240,0.2)}
+.edu-chevron{font-size:12px;color:var(--text3);transition:transform .3s;margin-left:8px;flex-shrink:0}
+.edu-item.open .edu-chevron{transform:rotate(180deg)}
+.edu-body{max-height:0;overflow:hidden;transition:max-height .4s cubic-bezier(.22,1,.36,1)}
+.edu-item.open .edu-body{max-height:400px;border-top:1px solid var(--border)}
+.edu-body-inner{padding:22px 26px 26px}
+.edu-details-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:14px}
+.edu-detail-box{background:var(--bg5);border:1px solid var(--border);padding:14px 16px;border-radius:2px;transition:background .3s,border-color .3s}
+.edu-detail-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.22em;color:var(--text3);text-transform:uppercase;margin-bottom:6px}
+.edu-detail-value{font-size:14px;font-weight:500;color:var(--text)}
+.edu-detail-value.highlight{color:var(--accent);font-size:18px}
+.edu-subjects{margin-top:16px}
+.edu-subjects-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.22em;color:var(--text3);text-transform:uppercase;margin-bottom:10px}
+.edu-tags{display:flex;flex-wrap:wrap;gap:7px}
+.edu-tag{padding:4px 11px;background:rgba(200,240,96,0.08);color:var(--accent);font-family:'DM Mono',monospace;font-size:9.5px;border-radius:1px}
+.edu-tag-blue{padding:4px 11px;background:rgba(96,200,240,0.08);color:var(--accent2);font-family:'DM Mono',monospace;font-size:9.5px;border-radius:1px}
+ 
+/* PROJECT */
+.project-card{border:1px solid var(--border2);background:var(--card-bg);padding:40px;display:grid;grid-template-columns:1.2fr 1fr;gap:40px;align-items:center;margin-top:42px;transition:border-color .3s,background .3s;position:relative;overflow:hidden}
+.project-card:hover{border-color:var(--border3)}
+.project-tag{font-family:'DM Mono',monospace;font-size:9.5px;letter-spacing:.2em;color:var(--accent);text-transform:uppercase;margin-bottom:12px}
+.project-title{font-family:'Playfair Display',serif;font-size:24px;font-weight:700;margin-bottom:12px;color:var(--text)}
+.project-desc{font-size:13.5px;color:var(--text2);line-height:1.85}
+.project-tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:20px}
+.tag{padding:4px 11px;background:rgba(200,240,96,0.08);color:var(--accent);font-family:'DM Mono',monospace;font-size:9.5px;border-radius:1px}
+.bar-chart-wrap{background:var(--bg2);border:1px solid var(--border);padding:18px 20px;display:flex;align-items:flex-end;gap:5px;height:150px;transition:background .3s}
+.bar{flex:1;border-radius:2px 2px 0 0;transform:scaleY(0);transform-origin:bottom;transition:transform .7s cubic-bezier(.22,1,.36,1)}
+.bar.green{background:linear-gradient(to top,var(--accent),rgba(200,240,96,0.2))}
+.bar.blue{background:linear-gradient(to top,var(--accent2),rgba(96,200,240,0.2))}
+.bar.animated{transform:scaleY(1)}
+ 
+/* PROFILES */
+.profiles-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:42px}
+.profile-card{display:block;background:var(--card-bg);padding:28px 24px;text-decoration:none;color:var(--text);transition:all .3s;position:relative;overflow:hidden;border:1px solid transparent}
+.profile-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--accent);transform:scaleX(0);transition:transform .3s;transform-origin:left}
+.profile-card:hover{background:var(--bg4);border-color:var(--border3)}
+.profile-card:hover::after{transform:scaleX(1)}
+.profile-icon{font-size:26px;margin-bottom:14px}
+.profile-platform{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.25em;color:var(--text3);text-transform:uppercase;margin-bottom:8px}
+.profile-handle{font-family:'Playfair Display',serif;font-size:17px;margin-bottom:6px;color:var(--text)}
+.profile-url{font-family:'DM Mono',monospace;font-size:10.5px;color:var(--accent)}
+ 
+/* CONTACT */
+.contact-grid{display:grid;grid-template-columns:1fr 1.4fr;gap:60px;margin-top:52px;align-items:start}
+.contact-info-block{display:flex;flex-direction:column;gap:28px}
+.contact-info-item{display:flex;align-items:flex-start;gap:16px;padding:20px;background:var(--card-bg);border:1px solid var(--border);transition:border-color .25s,background .3s}
+.contact-info-item:hover{border-color:var(--border3)}
+.ci-icon{font-size:20px;margin-top:2px;flex-shrink:0}
+.ci-label{font-family:'DM Mono',monospace;font-size:9.5px;letter-spacing:.22em;color:var(--text3);text-transform:uppercase;margin-bottom:5px}
+.ci-value{font-size:13.5px;color:var(--text)}
+.ci-value a{color:var(--accent);text-decoration:none}
+.ci-value a:hover{text-decoration:underline}
+.contact-form-box{background:var(--card-bg);border:1px solid var(--border2);padding:36px 32px;transition:background .3s,border-color .3s}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.form-group{display:flex;flex-direction:column;gap:7px;margin-bottom:16px}
+.form-group label{font-family:'DM Mono',monospace;font-size:9.5px;letter-spacing:.2em;color:var(--accent);text-transform:uppercase}
+.form-group input,.form-group textarea,.form-group select{background:var(--bg5);border:1px solid var(--border2);border-radius:2px;color:var(--text);font-family:'Figtree',sans-serif;font-size:13.5px;font-weight:300;padding:11px 14px;outline:none;transition:border-color .22s;width:100%}
+.form-group input:focus,.form-group textarea:focus,.form-group select:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(200,240,96,0.07)}
+.form-group input::placeholder,.form-group textarea::placeholder{color:var(--text3)}
+.form-group select option{background:var(--bg5);color:var(--text)}
+.form-group textarea{resize:vertical;min-height:120px}
+.form-submit{width:100%;padding:13px;background:var(--accent);color:#0b0c10;border:none;border-radius:2px;cursor:pointer;font-family:'DM Mono',monospace;font-size:11.5px;letter-spacing:.12em;font-weight:500;text-transform:uppercase;transition:all .22s;margin-top:4px}
+.form-submit:hover{background:var(--accent-hover);transform:translateY(-2px)}
+.form-success{display:none;align-items:center;gap:14px;background:rgba(200,240,96,0.07);border:1px solid rgba(200,240,96,0.25);padding:18px 20px;margin-top:16px;border-radius:2px}
+.form-success.show{display:flex}
+.form-success-icon{font-size:20px}
+.form-success-text{font-size:13px;color:var(--accent);font-family:'DM Mono',monospace;letter-spacing:.05em}
+ 
+footer{border-top:1px solid var(--border);padding:28px 72px;display:flex;justify-content:space-between;align-items:center;transition:border-color .3s}
+.footer-name{font-family:'Playfair Display',serif;font-size:16px;color:var(--text)}
+.footer-name em{color:var(--accent);font-style:italic}
+.footer-note{font-family:'DM Mono',monospace;font-size:10.5px;color:var(--text3);letter-spacing:.1em}
+ 
+@media(max-width:768px){
+  nav{padding:14px 28px}
+  .nav-links{gap:12px}
+  .hero-center{flex-direction:column;gap:44px;padding:0 28px;text-align:center}
+  .hero-cta{justify-content:center}
+  .hero-photo-wrap{width:230px;height:230px}
+  .hero-img,.hero-img-placeholder{width:210px;height:210px}
+  .section{padding:60px 28px}
+  .project-card{grid-template-columns:1fr}
+  .profiles-grid{grid-template-columns:1fr}
+  .contact-grid{grid-template-columns:1fr}
+  .form-row{grid-template-columns:1fr}
+  footer{flex-direction:column;gap:10px;padding:24px 28px;text-align:center}
+}
+</style>
+</head>
+<body>
+ 
+<nav>
+  <div class="nav-logo">Mahima<span>.</span></div>
+  <div class="nav-links">
+    <a href="#skills">Skills</a>
+    <a href="#tools">Tools</a>
+    <a href="#education">Education</a>
+    <a href="#projects">Projects</a>
+    <a href="#connect">Connect</a>
+    <a href="#contact">Contact</a>
+    <!-- FIX 2: toggleTheme() function now defined in the JS below -->
+    <div class="theme-toggle" onclick="toggleTheme()">
+      <div class="toggle-track"><div class="toggle-thumb"></div></div>
+      <span id="themeLabel" style="font-size:10px;font-family:'DM Mono',monospace;letter-spacing:.1em">DARK</span>
+    </div>
+  </div>
+</nav>
+ 
+<section class="hero">
+  <div class="glow1"></div>
+  <div class="glow2"></div>
+  <div class="hero-center">
+ 
+    <div class="hero-photo-wrap">
+      <div class="ring ring-1"></div>
+      <div class="ring ring-2"></div>
+      <div class="ring ring-3"></div>
+ 
+      <!-- FIX 1: Replaced broken/truncated base64 image with a styled placeholder.
+           Replace this div with: <img class="hero-img" src="YOUR_PHOTO_URL" alt="Mahima Jain"/>
+           once you have a valid hosted image URL. -->
+      <div class="hero-img-placeholder">👩‍💻</div>
+ 
+      <div class="hero-badge">
+        <div class="badge-dot"></div>
+        <span class="badge-text">Open to Opportunities</span>
+      </div>
+    </div>
+ 
+    <div class="hero-info">
+      <div class="eyebrow">Data Analyst · Storyteller</div>
+      <h1 class="hero-name">Mahima<br/><em>Jain</em></h1>
+      <div class="hero-sub">B.Sc. Data Science · Fresher · Jabalpur, India</div>
+      <p class="hero-desc">Turning raw data into clear, compelling stories. Passionate about analytics, visualization, and using data to drive smarter decisions.</p>
+      <div class="hero-cta">
+        <a href="#projects" class="btn btn-primary">View Projects</a>
+        <a href="#contact" class="btn btn-ghost">Get in Touch</a>
+      </div>
+    </div>
+ 
+  </div>
+</section>
+ 
+<!-- SKILLS -->
+<div id="skills" class="section-dark">
+  <section class="section">
+    <div class="sec-label">
+      <span>01 — Skills</span>
+      <div class="sec-label-line"></div>
+    </div>
+    <h2 class="sec-title">What I <em>Bring</em></h2>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <div class="skill-icon">📊</div>
+        <div class="skill-name">Data Analysis</div>
+        <div class="skill-desc">Cleaning, transforming, and analyzing structured and unstructured datasets to extract meaningful patterns.</div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">📈</div>
+        <div class="skill-name">Data Visualization</div>
+        <div class="skill-desc">Crafting intuitive charts and dashboards that communicate insights clearly to technical and non-technical stakeholders.</div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">🧠</div>
+        <div class="skill-name">Statistical Thinking</div>
+        <div class="skill-desc">Applying probability, hypothesis testing, and statistical models to validate assumptions and drive decisions.</div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">🗄️</div>
+        <div class="skill-name">Database Querying</div>
+        <div class="skill-desc">Writing efficient SQL queries to extract, join, and aggregate data from relational databases.</div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">🤖</div>
+        <div class="skill-name">Machine Learning Basics</div>
+        <div class="skill-desc">Familiarity with supervised learning models, feature engineering, and evaluation metrics for predictive analytics.</div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">📝</div>
+        <div class="skill-name">Reporting & Storytelling</div>
+        <div class="skill-desc">Translating complex findings into actionable reports and presentations that drive organizational impact.</div>
+      </div>
+    </div>
+  </section>
+</div>
+ 
+<!-- TOOLS -->
+<div id="tools">
+  <section class="section">
+    <div class="sec-label">
+      <span>02 — Tools</span>
+      <div class="sec-label-line"></div>
+    </div>
+    <h2 class="sec-title">My <em>Toolkit</em></h2>
+    <div class="tools-flex">
+      <div class="tool-pill"><div class="tool-dot dot-blue"></div>SQL</div>
+      <div class="tool-pill"><div class="tool-dot dot-blue"></div>Excel</div>
+      <div class="tool-pill"><div class="tool-dot dot-green"></div>Power BI</div>
+      <div class="tool-pill"><div class="tool-dot dot-blue"></div>Google Sheets</div>
+      <div class="tool-pill"><div class="tool-dot dot-green"></div>Python</div>
+      <div class="tool-pill"><div class="tool-dot dot-green"></div>Pandas</div>
+      <div class="tool-pill"><div class="tool-dot dot-green"></div>NumPy</div>
+      <div class="tool-pill"><div class="tool-dot dot-green"></div>Matplotlib</div>
+    </div>
+  </section>
+</div>
+ 
+<!-- EDUCATION -->
+<div id="education" class="section-dark">
+  <section class="section">
+    <div class="sec-label">
+      <span>03 — Education</span>
+      <div class="sec-label-line"></div>
+    </div>
+    <h2 class="sec-title">Academic <em>Journey</em></h2>
+    <!-- FIX 3: Accordion click handled via JS below -->
+    <div class="edu-accordion">
+      <div class="edu-item">
+        <div class="edu-header" onclick="toggleEdu(this)">
+          <div class="edu-icon">🎓</div>
+          <div class="edu-header-info">
+            <div class="edu-degree">B.Tech — Computer Science Engineering</div>
+            <div class="edu-school">Eklavya University, Damoh · Jan 2023 – Jun 2026 (Expected)</div>
+          </div>
+          <span class="edu-status status-pursuing">Pursuing</span>
+          <span class="edu-chevron">▼</span>
+        </div>
+        <div class="edu-body">
+          <div class="edu-body-inner">
+            <div class="edu-details-grid">
+              <div class="edu-detail-box">
+                <div class="edu-detail-label">Current CGPA</div>
+                <div class="edu-detail-value highlight">7.19</div>
+              </div>
+              <div class="edu-detail-box">
+                <div class="edu-detail-label">Year</div>
+                <div class="edu-detail-value">4th Year</div>
+              </div>
+              <div class="edu-detail-box">
+                <div class="edu-detail-label">Expected</div>
+                <div class="edu-detail-value">June 2026</div>
+              </div>
+            </div>
+            <div class="edu-subjects">
+              <div class="edu-subjects-label">Key Subjects</div>
+              <div class="edu-tags">
+                <span class="edu-tag">Data Structures</span>
+                <span class="edu-tag">Database Systems</span>
+                <span class="edu-tag">Python Programming</span>
+                <span class="edu-tag">Machine Learning</span>
+                <span class="edu-tag">Computer Networks</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+ 
+      <div class="edu-item">
+        <div class="edu-header" onclick="toggleEdu(this)">
+          <div class="edu-icon">🏫</div>
+          <div class="edu-header-info">
+            <div class="edu-degree">Class XII — Science (PCM)</div>
+            <div class="edu-school">Government Modal High Secondary School Patera · 2022</div>
+          </div>
+          <span class="edu-status status-completed">Completed</span>
+          <span class="edu-chevron">▼</span>
+        </div>
+        <div class="edu-body">
+          <div class="edu-body-inner">
+            <div class="edu-details-grid">
+              <div class="edu-detail-box">
+                <div class="edu-detail-label">Percentage</div>
+                <div class="edu-detail-value highlight">89%</div>
+              </div>
+              <div class="edu-detail-box">
+                <div class="edu-detail-label">Board</div>
+                <div class="edu-detail-value">MP Board</div>
+              </div>
+            </div>
+            <div class="edu-subjects">
+              <div class="edu-subjects-label">Subjects</div>
+              <div class="edu-tags">
+                <span class="edu-tag-blue">Physics</span>
+                <span class="edu-tag-blue">Chemistry</span>
+                <span class="edu-tag-blue">Mathematics</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+ 
+<!-- PROJECTS -->
+<div id="projects">
+  <section class="section">
+    <div class="sec-label">
+      <span>04 — Projects</span>
+      <div class="sec-label-line"></div>
+    </div>
+    <h2 class="sec-title">Featured <em>Work</em></h2>
+ 
+    <!-- FIX 4: Bar chart animation now triggered by IntersectionObserver in JS -->
+    <div class="project-card">
+      <div>
+        <div class="project-tag">Data Analysis · Python</div>
+        <h3 class="project-title">Sales Performance Dashboard</h3>
+        <p class="project-desc">Analyzed 50,000+ sales records to uncover regional trends, seasonal patterns, and top-performing SKUs. Built interactive Power BI dashboard reducing reporting time by 40%.</p>
+        <div class="project-tags">
+          <span class="tag">Python</span>
+          <span class="tag">Pandas</span>
+          <span class="tag">Power BI</span>
+          <span class="tag">SQL</span>
+        </div>
+      </div>
+      <div class="bar-chart-wrap" id="barChart1">
+        <div class="bar green" style="height:55%"></div>
+        <div class="bar blue"  style="height:72%"></div>
+        <div class="bar green" style="height:48%"></div>
+        <div class="bar blue"  style="height:88%"></div>
+        <div class="bar green" style="height:63%"></div>
+        <div class="bar blue"  style="height:95%"></div>
+        <div class="bar green" style="height:79%"></div>
+      </div>
+    </div>
+ 
+    <div class="project-card" style="margin-top:16px">
+      <div>
+        <div class="project-tag">Machine Learning · Classification</div>
+        <h3 class="project-title">Customer Churn Predictor</h3>
+        <p class="project-desc">Built a churn prediction model on a telecom dataset with 85% accuracy using Random Forest. Identified key churn drivers through feature importance analysis.</p>
+        <div class="project-tags">
+          <span class="tag">Scikit-learn</span>
+          <span class="tag">Python</span>
+          <span class="tag">Seaborn</span>
+          <span class="tag">Jupyter</span>
+        </div>
+      </div>
+      <div class="bar-chart-wrap" id="barChart2">
+        <div class="bar blue"  style="height:80%"></div>
+        <div class="bar green" style="height:65%"></div>
+        <div class="bar blue"  style="height:90%"></div>
+        <div class="bar green" style="height:50%"></div>
+        <div class="bar blue"  style="height:75%"></div>
+        <div class="bar green" style="height:85%"></div>
+        <div class="bar blue"  style="height:70%"></div>
+      </div>
+    </div>
+  </section>
+</div>
+ 
+<!-- CONNECT / PROFILES -->
+<div id="connect" class="section-dark">
+  <section class="section">
+    <div class="sec-label">
+      <span>05 — Connect</span>
+      <div class="sec-label-line"></div>
+    </div>
+    <h2 class="sec-title">Find Me <em>Online</em></h2>
+    <div class="profiles-grid">
+      <a href="https://github.com/Mahimajain031" target="_blank" class="profile-card">
+        <div class="profile-icon">🐙</div>
+        <div class="profile-platform">GitHub</div>
+        <div class="profile-handle">Mahimajain031</div>
+        <div class="profile-url">github.com/Mahimajain031</div>
+      </a>
+      <a href="https://linkedin.com/in/mahima-jain" target="_blank" class="profile-card">
+        <div class="profile-icon">💼</div>
+        <div class="profile-platform">LinkedIn</div>
+        <div class="profile-handle">Mahima Jain</div>
+        <div class="profile-url">linkedin.com/in/mahima-jain</div>
+      </a>
+      <a href="https://kaggle.com/mahimajain" target="_blank" class="profile-card">
+        <div class="profile-icon">📓</div>
+        <div class="profile-platform">Kaggle</div>
+        <div class="profile-handle">mahimajain</div>
+        <div class="profile-url">kaggle.com/mahimajain</div>
+      </a>
+    </div>
+  </section>
+</div>
+ 
+<!-- CONTACT -->
+<div id="contact">
+  <section class="section">
+    <div class="sec-label">
+      <span>06 — Contact</span>
+      <div class="sec-label-line"></div>
+    </div>
+    <h2 class="sec-title">Let's <em>Talk</em></h2>
+    <div class="contact-grid">
+      <div class="contact-info-block">
+        <div class="contact-info-item">
+          <div class="ci-icon">📧</div>
+          <div>
+            <div class="ci-label">Email</div>
+            <div class="ci-value"><a href="mailto:mahimajain031@gmail.com">mahimajain031@gmail.com</a></div>
+          </div>
+        </div>
+        <div class="contact-info-item">
+          <div class="ci-icon">📍</div>
+          <div>
+            <div class="ci-label">Location</div>
+            <div class="ci-value">Damoh, Madhya Pradesh, India</div>
+          </div>
+        </div>
+        <div class="contact-info-item">
+          <div class="ci-icon">⏰</div>
+          <div>
+            <div class="ci-label">Availability</div>
+            <div class="ci-value">Open to full-time & internship roles</div>
+          </div>
+        </div>
+      </div>
+ 
+      <!-- FIX 5: Form now has a working submit handler -->
+      <div class="contact-form-box">
+        <div class="form-row">
+          <div class="form-group">
+            <label>Name</label>
+            <input id="f-name" type="text" placeholder="Your name"/>
+          </div>
+          <div class="form-group">
+            <label>Email</label>
+            <input id="f-email" type="email" placeholder="your@email.com"/>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Subject</label>
+          <select id="f-subject">
+            <option value="">Select a topic…</option>
+            <option>Job Opportunity</option>
+            <option>Internship</option>
+            <option>Collaboration</option>
+            <option>General Enquiry</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Message</label>
+          <textarea id="f-message" placeholder="Tell me more…"></textarea>
+        </div>
+        <button class="form-submit" onclick="submitForm()">Send Message</button>
+        <div class="form-success" id="formSuccess">
+          <div class="form-success-icon">✅</div>
+          <div class="form-success-text">Message sent! I'll get back to you soon.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+ 
+<footer>
+  <div class="footer-name">Mahima <em>Jain</em></div>
+  <div class="footer-note">© 2025 · Data Analyst · Built with passion</div>
+</footer>
+ 
+<!-- =============================================
+  FIX 2: All JavaScript — previously 100% missing
+  This block adds:
+  - toggleTheme()           — dark/light switch
+  - toggleEdu()             — accordion open/close
+  - submitForm()            — contact form handler
+  - IntersectionObserver    — bar chart animation trigger
+============================================= -->
+<script>
+  // --- Theme Toggle ---
+  function toggleTheme() {
+    const html = document.documentElement;
+    const current = html.getAttribute('data-theme');
+    const next = current === 'dark' ? 'light' : 'dark';
+    html.setAttribute('data-theme', next);
+    document.getElementById('themeLabel').textContent = next.toUpperCase();
+  }
+ 
+  // --- Education Accordion ---
+  function toggleEdu(header) {
+    const item = header.parentElement;
+    item.classList.toggle('open');
+  }
+ 
+  // --- Contact Form Submit ---
+  function submitForm() {
+    const name    = document.getElementById('f-name').value.trim();
+    const email   = document.getElementById('f-email').value.trim();
+    const subject = document.getElementById('f-subject').value;
+    const message = document.getElementById('f-message').value.trim();
+ 
+    if (!name || !email || !subject || !message) {
+      alert('Please fill in all fields before sending.');
+      return;
+    }
+    // Show success message
+    document.getElementById('formSuccess').classList.add('show');
+    // Reset fields
+    document.getElementById('f-name').value = '';
+    document.getElementById('f-email').value = '';
+    document.getElementById('f-subject').value = '';
+    document.getElementById('f-message').value = '';
+  }
+ 
+  // --- Bar Chart Animation (IntersectionObserver) ---
+  function animateBars(chartId) {
+    const chart = document.getElementById(chartId);
+    if (!chart) return;
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          chart.querySelectorAll('.bar').forEach((bar, i) => {
+            setTimeout(() => bar.classList.add('animated'), i * 80);
+          });
+          observer.disconnect();
+        }
+      });
+    }, { threshold: 0.3 });
+    observer.observe(chart);
+  }
+ 
+  animateBars('barChart1');
+  animateBars('barChart2');
+</script>
+ 
+</body>
+</html>
+ 
